@@ -30,37 +30,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_result">
 
-        <Button android:id="@+id/btn_clear" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="0" android:layout_column="0" android:text="C" />
-        <Button android:id="@+id/btn_backspace" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="0" android:layout_column="1" android:text="⌫" />
-        <Button android:id="@+id/btn_percentage" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="0" android:layout_column="2" android:text="%" />
-        <Button android:id="@+id/btn_divide" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="0" android:layout_column="3" android:text="/" />
+        <Button android:id="@+id/btn_clear" android:textColor="@color/red" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="0" android:layout_column="0" android:text="C" />
+        <Button android:id="@+id/btn_backspace" android:textColor="@color/red" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="0" android:layout_column="1" android:text="⌫" />
+        <Button android:id="@+id/btn_percentage" android:textColor="@color/green" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="0" android:layout_column="2" android:text="%" />
+        <Button android:id="@+id/btn_divide" android:textColor="@color/green" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="0" android:layout_column="3" android:text="/" />
 
-        <Button android:id="@+id/btn_7" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="1" android:layout_column="0" android:text="7" />
-        <Button android:id="@+id/btn_8" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="1" android:layout_column="1" android:text="8" />
-        <Button android:id="@+id/btn_9" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="1" android:layout_column="2" android:text="9" />
-        <Button android:id="@+id/btn_multiply" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="1" android:layout_column="3" android:text="*" />
+        <Button android:id="@+id/btn_7" android:textColor="@color/black" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="1" android:layout_column="0" android:text="7" />
+        <Button android:id="@+id/btn_8" android:textColor="@color/black" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="1" android:layout_column="1" android:text="8" />
+        <Button android:id="@+id/btn_9" android:textColor="@color/black" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="1" android:layout_column="2" android:text="9" />
+        <Button android:id="@+id/btn_multiply" android:textColor="@color/green" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="1" android:layout_column="3" android:text="*" />
 
-        <Button android:id="@+id/btn_4" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="2" android:layout_column="0" android:text="4" />
-        <Button android:id="@+id/btn_5" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="2" android:layout_column="1" android:text="5" />
-        <Button android:id="@+id/btn_6" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="2" android:layout_column="2" android:text="6" />
-        <Button android:id="@+id/btn_subtract" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="2" android:layout_column="3" android:text="-" />
+        <Button android:id="@+id/btn_4" android:textColor="@color/black" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="2" android:layout_column="0" android:text="4" />
+        <Button android:id="@+id/btn_5" android:textColor="@color/black" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="2" android:layout_column="1" android:text="5" />
+        <Button android:id="@+id/btn_6" android:textColor="@color/black" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="2" android:layout_column="2" android:text="6" />
+        <Button android:id="@+id/btn_subtract" android:textColor="@color/green" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="2" android:layout_column="3" android:text="-" />
 
-        <Button android:id="@+id/btn_1" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="3" android:layout_column="0" android:text="1" />
-        <Button android:id="@+id/btn_2" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="3" android:layout_column="1" android:text="2" />
-        <Button android:id="@+id/btn_3" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="3" android:layout_column="2" android:text="3" />
-        <Button android:id="@+id/btn_add" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="3" android:layout_column="3" android:text="+" />
+        <Button android:id="@+id/btn_1" android:textColor="@color/black" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="3" android:layout_column="0" android:text="1" />
+        <Button android:id="@+id/btn_2" android:textColor="@color/black" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="3" android:layout_column="1" android:text="2" />
+        <Button android:id="@+id/btn_3" android:textColor="@color/black" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="3" android:layout_column="2" android:text="3" />
+        <Button android:id="@+id/btn_add" android:textColor="@color/green" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="3" android:layout_column="3" android:text="+" />
 
-        <Button android:id="@+id/btn_0" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="4" android:layout_column="0" android:text="0" />
-        <Button android:id="@+id/btn_decimal" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="4" android:layout_column="1" android:text="." />
+        <Button android:id="@+id/btn_0" android:textColor="@color/black" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="4" android:layout_column="0" android:text="0" />
+        <Button android:id="@+id/btn_decimal" android:textColor="@color/black" android:backgroundTint="@color/gray" android:textSize="20dp" android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_row="4" android:layout_column="1" android:text="." />
         <Button
             android:id="@+id/btn_equals"
-            android:layout_margin="3dp" android:layout_rowWeight="1" android:layout_columnWeight="1"
+            android:textSize="20dp"
+            android:layout_margin="3dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill_horizontal"
             android:layout_height="wrap_content"
             android:layout_row="4"
             android:layout_column="2"
             android:layout_columnSpan="2"
-            android:text="=" />
+            android:text="="
+            android:backgroundTint="@color/orange"
+            android:textColor="@color/black"/>
 
     </GridLayout>
 
