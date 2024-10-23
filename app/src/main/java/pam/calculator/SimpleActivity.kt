@@ -39,6 +39,16 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
 
         txtResult = findViewById(R.id.result)
         setListeners()
+
+        savedInstanceState?.let {
+            txtResult.text = it.getString("RESULT_TEXT")
+            stateError = it.getBoolean("STATE_ERROR")
+        }
+    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("RESULT_TEXT", txtResult.text.toString())
+        outState.putBoolean("STATE_ERROR", stateError)
     }
 
     private fun setListeners() {
