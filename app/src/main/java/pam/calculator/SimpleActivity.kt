@@ -26,10 +26,10 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
         R.id.btn_8, R.id.btn_9, R.id.btn_decimal,
 
         // Operations
-        R.id.btn_add, R.id.btn_subtract, R.id.btn_multiply, R.id.btn_divide,
+        R.id.btn_add, R.id.btn_subtract, R.id.btn_multiply, R.id.btn_divide, R.id.btn_percentage,
 
         // Actions
-        R.id.btn_percentage, R.id.btn_clear, R.id.btn_backspace, R.id.btn_equals
+        R.id.btn_clear, R.id.btn_backspace, R.id.btn_equals
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -162,7 +162,10 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
             '-' -> a - b
             '*' -> a * b
             '/' -> {
-                if (b == 0.0) throw ArithmeticException("Cannot divide by zero")
+                if (b == 0.0) {
+                    throw ArithmeticException("Cannot divide by zero")
+                }
+
                 a / b
             }
             '%' -> a % b
