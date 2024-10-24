@@ -45,6 +45,7 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
             stateError = it.getBoolean("STATE_ERROR")
         }
     }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString("RESULT_TEXT", txtResult.text.toString())
