@@ -60,20 +60,6 @@
             android:textSize="@dimen/btnTextSize" />
 
         <Button
-            android:id="@+id/btn_percentage"
-            android:layout_height="0dp"
-            android:layout_width="0dp"
-            android:layout_row="0"
-            android:layout_rowWeight="1"
-            android:layout_column="2"
-            android:layout_columnWeight="1"
-            android:layout_margin="3dp"
-            android:backgroundTint="@color/gray"
-            android:text="%"
-            android:textColor="@color/green"
-            android:textSize="@dimen/btnTextSize" />
-
-        <Button
             android:id="@+id/btn_divide"
             android:layout_height="0dp"
             android:layout_width="0dp"

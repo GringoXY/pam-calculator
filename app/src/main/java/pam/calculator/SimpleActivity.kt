@@ -26,7 +26,7 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
         R.id.btn_8, R.id.btn_9, R.id.btn_decimal,
 
         // Operations
-        R.id.btn_add, R.id.btn_subtract, R.id.btn_multiply, R.id.btn_divide, R.id.btn_percentage,
+        R.id.btn_add, R.id.btn_subtract, R.id.btn_multiply, R.id.btn_divide,
 
         // Actions
         R.id.btn_clear, R.id.btn_backspace, R.id.btn_equals
@@ -63,10 +63,12 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3,
             R.id.btn_4, R.id.btn_5, R.id.btn_6, R.id.btn_7,
             R.id.btn_8, R.id.btn_9 -> onDigit(view)
+
             R.id.btn_decimal -> onDecimalPoint()
+
             R.id.btn_add, R.id.btn_subtract,
-            R.id.btn_multiply, R.id.btn_divide,
-            R.id.btn_percentage -> onOperator(view)
+            R.id.btn_multiply, R.id.btn_divide -> onOperator(view)
+
             R.id.btn_clear -> onClear()
             R.id.btn_backspace -> onBackspace()
             R.id.btn_equals -> onEqual()
@@ -137,7 +139,7 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
                     values.push(sb.toString().toDouble())
                     i -= 1
                 }
-                tokens[i] in arrayOf('+', '-', '*', '/', '%') -> {
+                tokens[i] in arrayOf('+', '-', '*', '/') -> {
                     while (operations.isNotEmpty() && hasPrecedence(tokens[i], operations.peek())) {
                         values.push(applyOp(operations.pop(), values.pop(), values.pop()))
                     }
@@ -158,7 +160,7 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun hasPrecedence(op1: Char, op2: Char): Boolean {
         if (
-            (op1 == '*' || op1 == '/' || op1 == '%')
+            (op1 == '*' || op1 == '/')
             && (op2 == '+' || op2 == '-')
         ) {
             return false
@@ -179,7 +181,6 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
 
                 a / b
             }
-            '%' -> a % b
             else -> 0.0
         }
     }
