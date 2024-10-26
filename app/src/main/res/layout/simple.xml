@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".SimpleActivity">
 
+    <ScrollView
+        android:id="@+id/scrollView_history"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.17"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/result"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <TextView
+            android:id="@+id/history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/txtHistorySize" />
+    </ScrollView>
+
     <TextView
         android:id="@+id/result"
         android:layout_width="0dp"
@@ -15,9 +33,9 @@
         android:hint="Start typing..."
         android:textSize="@dimen/txtViewSize"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.34"
+        app:layout_constraintHeight_percent="0.17"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/scrollView_history" />
 
     <GridLayout
         android:layout_width="0dp"
@@ -32,12 +50,26 @@
         app:layout_constraintTop_toBottomOf="@id/result">
 
         <Button
-            android:id="@+id/btn_clear"
+            android:id="@+id/btn_all_clear"
             android:layout_height="0dp"
             android:layout_width="0dp"
             android:layout_row="0"
             android:layout_rowWeight="1"
             android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_margin="3dp"
+            android:backgroundTint="@color/gray"
+            android:text="AC"
+            android:textColor="@color/red"
+            android:textSize="@dimen/btnTextSize" />
+
+        <Button
+            android:id="@+id/btn_clear"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
             android:layout_columnWeight="1"
             android:layout_margin="3dp"
             android:backgroundTint="@color/gray"
@@ -51,26 +83,12 @@
             android:layout_width="0dp"
             android:layout_row="0"
             android:layout_rowWeight="1"
-            android:layout_column="1"
+            android:layout_column="2"
             android:layout_columnWeight="1"
             android:layout_margin="3dp"
             android:backgroundTint="@color/gray"
             android:text="⌫"
             android:textColor="@color/red"
-            android:textSize="@dimen/btnTextSize" />
-
-        <Button
-            android:id="@+id/btn_percentage"
-            android:layout_height="0dp"
-            android:layout_width="0dp"
-            android:layout_row="0"
-            android:layout_rowWeight="1"
-            android:layout_column="2"
-            android:layout_columnWeight="1"
-            android:layout_margin="3dp"
-            android:backgroundTint="@color/gray"
-            android:text="%"
-            android:textColor="@color/green"
             android:textSize="@dimen/btnTextSize" />
 
         <Button
@@ -97,7 +115,6 @@
             android:layout_columnWeight="1"
             android:layout_margin="3dp"
             android:backgroundTint="@color/gray"
-            android:onClick="onBtnClick"
             android:text="7"
             android:textColor="@color/black"
             android:textSize="@dimen/btnTextSize" />
@@ -112,7 +129,6 @@
             android:layout_columnWeight="1"
             android:layout_margin="3dp"
             android:backgroundTint="@color/gray"
-            android:onClick="onBtnClick"
             android:text="8"
             android:textColor="@color/black"
             android:textSize="@dimen/btnTextSize" />
@@ -127,7 +143,6 @@
             android:layout_columnWeight="1"
             android:layout_margin="3dp"
             android:backgroundTint="@color/gray"
-            android:onClick="onBtnClick"
             android:text="9"
             android:textColor="@color/black"
             android:textSize="@dimen/btnTextSize" />
@@ -156,7 +171,6 @@
             android:layout_columnWeight="1"
             android:layout_margin="3dp"
             android:backgroundTint="@color/gray"
-            android:onClick="onBtnClick"
             android:text="4"
             android:textColor="@color/black"
             android:textSize="@dimen/btnTextSize" />
@@ -171,7 +185,6 @@
             android:layout_columnWeight="1"
             android:layout_margin="3dp"
             android:backgroundTint="@color/gray"
-            android:onClick="onBtnClick"
             android:text="5"
             android:textColor="@color/black"
             android:textSize="@dimen/btnTextSize" />
@@ -186,7 +199,6 @@
             android:layout_columnWeight="1"
             android:layout_margin="3dp"
             android:backgroundTint="@color/gray"
-            android:onClick="onBtnClick"
             android:text="6"
             android:textColor="@color/black"
             android:textSize="@dimen/btnTextSize" />
@@ -215,7 +227,6 @@
             android:layout_columnWeight="1"
             android:layout_margin="3dp"
             android:backgroundTint="@color/gray"
-            android:onClick="onBtnClick"
             android:text="1"
             android:textColor="@color/black"
             android:textSize="@dimen/btnTextSize" />
@@ -230,7 +241,6 @@
             android:layout_columnWeight="1"
             android:layout_margin="3dp"
             android:backgroundTint="@color/gray"
-            android:onClick="onBtnClick"
             android:text="2"
             android:textColor="@color/black"
             android:textSize="@dimen/btnTextSize" />
@@ -245,7 +255,6 @@
             android:layout_columnWeight="1"
             android:layout_margin="3dp"
             android:backgroundTint="@color/gray"
-            android:onClick="onBtnClick"
             android:text="3"
             android:textColor="@color/black"
             android:textSize="@dimen/btnTextSize" />
@@ -274,7 +283,6 @@
             android:layout_columnWeight="1"
             android:layout_margin="3dp"
             android:backgroundTint="@color/gray"
-            android:onClick="onBtnClick"
             android:text="0"
             android:textColor="@color/black"
             android:textSize="@dimen/btnTextSize" />
@@ -289,9 +297,22 @@
             android:layout_columnWeight="1"
             android:layout_margin="3dp"
             android:backgroundTint="@color/gray"
-            android:onClick="onBtnClick"
             android:text="."
             android:textColor="@color/black"
+            android:textSize="@dimen/btnTextSize" />
+
+        <Button
+            android:id="@+id/btn_opposite"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_row="4"
+            android:layout_rowWeight="1"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:layout_margin="3dp"
+            android:backgroundTint="@color/gray"
+            android:text="+\\-"
+            android:textColor="@color/green"
             android:textSize="@dimen/btnTextSize" />
 
         <Button
@@ -300,8 +321,7 @@
             android:layout_height="0dp"
             android:layout_row="4"
             android:layout_rowWeight="1"
-            android:layout_column="2"
-            android:layout_columnSpan="2"
+            android:layout_column="3"
             android:layout_columnWeight="1"
             android:layout_gravity="fill_horizontal"
             android:layout_margin="3dp"
