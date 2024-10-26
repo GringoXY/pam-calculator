@@ -15,12 +15,17 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var scrollViewHistory: ScrollView
 
     private val lastNumeric: Boolean
-        get() = txtResult.text.last().isDigit()
+        get() = txtResult.text.lastOrNull()?.isDigit() ?: run {
+            false
+        }
+
+    private val hasValidPrecedenceOperatorForMinus: Boolean
+        get() = txtResult.text.lastOrNull() in arrayOf('+', '*', '/')
 
     private var stateError: Boolean = false
 
     private val lastDot: Boolean
-        get() = txtResult.text.last() == '.'
+        get() = txtResult.text.lastOrNull() == '.'
 
     private val buttons: List<Int> = listOf(
         // Number creation
@@ -36,7 +41,7 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
     )
 
     private val savedResultInstanceStateKey: String = "RESULT_TEXT"
-    private val savedHistoryInstanceStateKey: String = "HISTORY"
+    private val savedHistoryInstanceStateKey: String = "HISTORY_TEXT"
     private val savedStateErrorInstanceStateKey: String = "STATE_ERROR"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,7 +113,16 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun onOperator(view: View) {
-        if (lastNumeric && !stateError) {
+        if (
+            (
+                lastNumeric
+                || (
+                    (hasValidPrecedenceOperatorForMinus || txtResult.text.isEmpty())
+                    && (view as Button).text == "-"
+                )
+            )
+            && !stateError
+        ) {
             txtResult.append((view as Button).text)
         }
     }
@@ -159,8 +173,21 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
         var i = 0
         while (i < tokens.size) {
             when {
-                tokens[i].isDigit() || tokens[i] == '.' -> {
+                (
+                    tokens[i].isDigit()
+                    || tokens[i] == '.'
+                ) || (
+                    tokens[i] == '-'
+                    && (
+                        i == 0 // When '-' is before first number
+                        || tokens[i - 1] in arrayOf('+', '-', '*', '/') // When before operator?
+                    )
+                ) -> {
                     val sb = StringBuilder()
+                    if (tokens[i] == '-') {
+                        sb.append(tokens[i++])
+                    }
+
                     while (i < tokens.size && (tokens[i].isDigit() || tokens[i] == '.')) {
                         sb.append(tokens[i++])
                     }
