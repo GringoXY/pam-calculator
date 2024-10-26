@@ -50,12 +50,26 @@
         app:layout_constraintTop_toBottomOf="@id/result">
 
         <Button
-            android:id="@+id/btn_clear"
+            android:id="@+id/btn_all_clear"
             android:layout_height="0dp"
             android:layout_width="0dp"
             android:layout_row="0"
             android:layout_rowWeight="1"
             android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_margin="3dp"
+            android:backgroundTint="@color/gray"
+            android:text="AC"
+            android:textColor="@color/red"
+            android:textSize="@dimen/btnTextSize" />
+
+        <Button
+            android:id="@+id/btn_clear"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
             android:layout_columnWeight="1"
             android:layout_margin="3dp"
             android:backgroundTint="@color/gray"
@@ -69,7 +83,7 @@
             android:layout_width="0dp"
             android:layout_row="0"
             android:layout_rowWeight="1"
-            android:layout_column="1"
+            android:layout_column="2"
             android:layout_columnWeight="1"
             android:layout_margin="3dp"
             android:backgroundTint="@color/gray"

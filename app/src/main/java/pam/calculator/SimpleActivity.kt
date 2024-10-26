@@ -32,7 +32,7 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
         R.id.btn_add, R.id.btn_subtract, R.id.btn_multiply, R.id.btn_divide,
 
         // Actions
-        R.id.btn_clear, R.id.btn_backspace, R.id.btn_equals
+        R.id.btn_all_clear, R.id.btn_clear, R.id.btn_backspace, R.id.btn_equals
     )
 
     private val savedResultInstanceStateKey: String = "RESULT_TEXT"
@@ -84,6 +84,7 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_add, R.id.btn_subtract,
             R.id.btn_multiply, R.id.btn_divide -> onOperator(view)
 
+            R.id.btn_all_clear -> onAllClear()
             R.id.btn_clear -> onClear()
             R.id.btn_backspace -> onBackspace()
             R.id.btn_equals -> onEqual()
@@ -110,6 +111,11 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
         if (lastNumeric && !stateError) {
             txtResult.append((view as Button).text)
         }
+    }
+
+    private fun onAllClear() {
+        txtHistory.text = ""
+        onClear()
     }
 
     private fun onClear() {
