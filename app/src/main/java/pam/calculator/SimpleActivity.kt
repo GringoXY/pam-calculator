@@ -37,7 +37,8 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
         R.id.btn_add, R.id.btn_subtract, R.id.btn_multiply, R.id.btn_divide,
 
         // Actions
-        R.id.btn_all_clear, R.id.btn_clear, R.id.btn_backspace, R.id.btn_equals
+        R.id.btn_all_clear, R.id.btn_clear, R.id.btn_backspace,
+        R.id.btn_opposite, R.id.btn_equals
     )
 
     private val savedResultInstanceStateKey: String = "RESULT_TEXT"
@@ -92,6 +93,7 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_all_clear -> onAllClear()
             R.id.btn_clear -> onClear()
             R.id.btn_backspace -> onBackspace()
+            R.id.btn_opposite -> onOpposite()
             R.id.btn_equals -> onEqual()
         }
     }
@@ -141,6 +143,41 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
         val text: String = txtResult.text.toString()
         if (text.isNotEmpty()) {
             txtResult.text = text.dropLast(1)
+        }
+    }
+
+    private fun onOpposite() {
+        val text = txtResult.text.toString();
+        if (text.isNotEmpty()) {
+            val lastOperatorIndex = maxOf(
+                text.lastIndexOf('+'),
+                text.lastIndexOf('-'),
+                text.lastIndexOf('*'),
+                text.lastIndexOf('/')
+            )
+
+            var lastNumber: String = ""
+            var leftExpression: String = ""
+            if (lastOperatorIndex < 1) { // Single number occurrence
+                lastNumber = text
+            } else {
+                leftExpression = text.substring(0, lastOperatorIndex + 1)
+                lastNumber = text.substring(lastOperatorIndex + 1)
+            }
+
+            leftExpression = if (
+                leftExpression.lastOrNull() == '-'
+                && leftExpression.getOrNull(leftExpression.length - 2) in arrayOf('+', '-', '*', '/')
+            ) {
+                leftExpression.dropLast(1)
+            } else if (leftExpression.isEmpty() && lastNumber.firstOrNull() == '-') {
+                lastNumber = lastNumber.substring(1)
+                leftExpression
+            } else {
+                "$leftExpression-"
+            }
+
+            txtResult.text = "$leftExpression$lastNumber"
         }
     }
 
