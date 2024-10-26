@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".SimpleActivity">
 
+    <ScrollView
+        android:id="@+id/scrollView_history"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.17"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/result"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <TextView
+            android:id="@+id/history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/txtHistorySize" />
+    </ScrollView>
+
     <TextView
         android:id="@+id/result"
         android:layout_width="0dp"
@@ -15,9 +33,9 @@
         android:hint="Start typing..."
         android:textSize="@dimen/txtViewSize"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.34"
+        app:layout_constraintHeight_percent="0.17"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/scrollView_history" />
 
     <GridLayout
         android:layout_width="0dp"

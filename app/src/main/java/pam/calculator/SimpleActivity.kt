@@ -3,6 +3,7 @@ package pam.calculator
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,8 @@ import java.util.Stack
 
 class SimpleActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var txtResult: TextView
+    private lateinit var txtHistory: TextView
+    private lateinit var scrollViewHistory: ScrollView
 
     private val lastNumeric: Boolean
         get() = txtResult.text.last().isDigit()
@@ -32,24 +35,36 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
         R.id.btn_clear, R.id.btn_backspace, R.id.btn_equals
     )
 
+    private val savedResultInstanceStateKey: String = "RESULT_TEXT"
+    private val savedHistoryInstanceStateKey: String = "HISTORY"
+    private val savedStateErrorInstanceStateKey: String = "STATE_ERROR"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.simple)
 
-        txtResult = findViewById(R.id.result)
+        findControls()
         setListeners()
 
         savedInstanceState?.let {
-            txtResult.text = it.getString("RESULT_TEXT")
-            stateError = it.getBoolean("STATE_ERROR")
+            txtResult.text = it.getString(savedResultInstanceStateKey)
+            txtHistory.text = it.getString(savedHistoryInstanceStateKey)
+            stateError = it.getBoolean(savedStateErrorInstanceStateKey)
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString("RESULT_TEXT", txtResult.text.toString())
-        outState.putBoolean("STATE_ERROR", stateError)
+        outState.putString(savedResultInstanceStateKey, txtResult.text.toString())
+        outState.putString(savedHistoryInstanceStateKey, txtHistory.text.toString())
+        outState.putBoolean(savedStateErrorInstanceStateKey, stateError)
+    }
+
+    private fun findControls() {
+        txtResult = findViewById(R.id.result)
+        txtHistory = findViewById(R.id.history)
+        scrollViewHistory = findViewById(R.id.scrollView_history)
     }
 
     private fun setListeners() {
@@ -115,10 +130,18 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
             try {
                 val result = evaluate(text)
                 txtResult.text = result.toString()
+                appendToHistory("${text}=${result}")
             } catch (e: Exception) {
                 txtResult.text = "Error: ${e.message}"
                 stateError = true
             }
+        }
+    }
+
+    private fun appendToHistory(line: String) {
+        txtHistory.append("\n${line}")
+        scrollViewHistory.post {
+            scrollViewHistory.fullScroll(View.FOCUS_DOWN)
         }
     }
 
