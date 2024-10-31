@@ -8,10 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var btnSimple: Button;
+    private lateinit var btnAdvanced: Button;
     private lateinit var btnExit: Button;
 
     private val menuMap: Map<Int, Class<*>> = mapOf(
-        R.layout.simple to SimpleActivity::class.java
+        R.layout.simple to SimpleActivity::class.java,
+        R.layout.advanced to AdvancedActivity::class.java
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,12 +27,17 @@ class MainActivity : AppCompatActivity() {
 
     fun findControls() {
         btnSimple = findViewById<Button>(R.id.btnSimple)
+        btnAdvanced = findViewById<Button>(R.id.btnAdvanced)
         btnExit = findViewById<Button>(R.id.btnExit)
     }
 
     fun setOnClickListeners() {
         btnSimple.setOnClickListener {
             menuMap.get(R.layout.simple)?.let { c -> onMenuButtonClick(c) }
+        }
+
+        btnAdvanced.setOnClickListener {
+            menuMap.get(R.layout.advanced)?.let { c -> onMenuButtonClick(c) }
         }
 
         btnExit.setOnClickListener {

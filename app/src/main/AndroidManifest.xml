@@ -24,6 +24,9 @@
         <activity
             android:name=".SimpleActivity"
             android:exported="false" />
+        <activity
+            android:name=".AdvancedActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
