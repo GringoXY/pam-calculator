@@ -35,7 +35,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
 
         // Operations
         R.id.btn_add, R.id.btn_subtract, R.id.btn_multiply, R.id.btn_divide,
-        R.id.btn_sin,
+        R.id.btn_sin, R.id.btn_cos,
 
         // Actions
         R.id.btn_all_clear, R.id.btn_clear, R.id.btn_backspace,
@@ -92,6 +92,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_multiply, R.id.btn_divide -> onOperator(view)
 
             R.id.btn_sin -> onSinus()
+            R.id.btn_cos -> onCosine()
 
             R.id.btn_all_clear -> onAllClear()
             R.id.btn_clear -> onClear()
@@ -141,7 +142,22 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
                 val sinus = Math.sin(radians).toString()
                 appendToHistory("sin($radians rad)=$sinus")
             } catch (e: Exception) {
-                txtResult.text = "Error: $e.message"
+                txtResult.text = "Error: ${e.message}"
+                stateError = true
+            }
+        }
+    }
+
+    private fun onCosine() {
+        if (lastNumeric && !stateError) {
+            val text: String = txtResult.text.toString()
+            try {
+                val result = evaluate(text)
+                val radians = Math.toRadians(result)
+                val cosine = Math.cos(radians).toString()
+`                appendToHistory("cos($radians rad)=$cosine")
+            } catch (e: Exception) {
+                txtResult.text = "Error: ${e.message}"
                 stateError = true
             }
         }
