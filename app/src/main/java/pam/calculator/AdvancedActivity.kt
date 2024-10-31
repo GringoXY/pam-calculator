@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import java.util.Stack
 import kotlin.math.cos
 import kotlin.math.ln
+import kotlin.math.log10
 import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.math.sqrt
@@ -51,7 +52,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
         R.id.btn_add, R.id.btn_subtract, R.id.btn_multiply, R.id.btn_divide,
         R.id.btn_sin, R.id.btn_cos, R.id.btn_tan,
         R.id.btn_sqrt, R.id.btn_power_two, R.id.btn_power,
-        R.id.btn_ln,
+        R.id.btn_ln, R.id.btn_log,
 
         // Actions
         R.id.btn_all_clear, R.id.btn_clear, R.id.btn_backspace,
@@ -113,6 +114,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_tan -> onTangent()
             R.id.btn_power_two -> onPowerTwo()
             R.id.btn_ln -> onNaturalLogarithm()
+            R.id.btn_log -> onCommonLogarithm()
 
             R.id.btn_all_clear -> onAllClear()
             R.id.btn_clear -> onClear()
@@ -239,6 +241,21 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
                 val naturalLogarithm = ln(result).toString()
                 txtResult.text = naturalLogarithm
                 appendToHistory("ln($text)=$naturalLogarithm")
+            } catch (e: Exception) {
+                txtResult.text = "Error: ${e.message}"
+                stateError = true
+            }
+        }
+    }
+
+    private fun onCommonLogarithm() {
+        if (lastNumeric && !stateError) {
+            val text: String = txtResult.text.toString()
+            try {
+                val result = evaluate(text)
+                val commonLogarithm = log10(result).toString()
+                txtResult.text = commonLogarithm
+                appendToHistory("log($text)=$commonLogarithm")
             } catch (e: Exception) {
                 txtResult.text = "Error: ${e.message}"
                 stateError = true
