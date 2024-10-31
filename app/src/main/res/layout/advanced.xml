@@ -411,7 +411,7 @@
             android:backgroundTint="@color/gray"
             android:text="."
             android:textColor="@color/black"
-            android:textSize="@dimen/btnTextSize" />
+            android:textSize="@dimen/btnTextSizeS" />
 
         <Button
             android:id="@+id/btn_opposite"
@@ -441,7 +441,7 @@
             android:backgroundTint="@color/orange"
             android:text="="
             android:textColor="@color/black"
-            android:textSize="@dimen/btnTextSize" />
+            android:textSize="@dimen/btnTextSizeS" />
 
     </GridLayout>
 
