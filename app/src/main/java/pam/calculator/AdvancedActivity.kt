@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import java.lang.Math.pow
 import java.util.Stack
 import kotlin.math.cos
+import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.math.tan
@@ -18,6 +19,14 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var txtResult: TextView
     private lateinit var txtHistory: TextView
     private lateinit var scrollViewHistory: ScrollView
+
+    private val operatorsMap = mapOf<Int, CharSequence>(
+        R.id.btn_add to "+",
+        R.id.btn_subtract to "-",
+        R.id.btn_multiply to "*",
+        R.id.btn_divide to "/",
+        R.id.btn_power to "^"
+    )
 
     private val lastNumeric: Boolean
         get() = txtResult.text.lastOrNull()?.isDigit() ?: run {
@@ -41,7 +50,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
         // Operations
         R.id.btn_add, R.id.btn_subtract, R.id.btn_multiply, R.id.btn_divide,
         R.id.btn_sin, R.id.btn_cos, R.id.btn_tan,
-        R.id.btn_sqrt, R.id.btn_power_two,
+        R.id.btn_sqrt, R.id.btn_power_two, R.id.btn_power,
 
 
         // Actions
@@ -96,7 +105,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_decimal -> onDecimalPoint()
 
             R.id.btn_add, R.id.btn_subtract,
-            R.id.btn_multiply, R.id.btn_divide -> onOperator(view)
+            R.id.btn_multiply, R.id.btn_divide, R.id.btn_power -> onOperator(view)
 
             R.id.btn_sin -> onSinus()
             R.id.btn_cos -> onCosine()
@@ -134,12 +143,12 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
                 lastNumeric
                 || (
                     (hasValidPrecedenceOperatorForMinus || txtResult.text.isEmpty())
-                    && (view as Button).text == "-"
+                    && view.id == R.id.btn_subtract
                 )
             )
             && !stateError
         ) {
-            txtResult.append((view as Button).text)
+            txtResult.append(operatorsMap.get(view.id))
         }
     }
 
@@ -211,7 +220,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             val text: String = txtResult.text.toString()
             try {
                 val result = evaluate(text)
-                val power = pow(result, 2.0).toString()
+                val power = result.pow(2.0).toString()
                 txtResult.text = power
                 appendToHistory("($text)^2=$power")
             } catch (e: Exception) {
@@ -245,7 +254,8 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
                 text.lastIndexOf('+'),
                 text.lastIndexOf('-'),
                 text.lastIndexOf('*'),
-                text.lastIndexOf('/')
+                text.lastIndexOf('/'),
+                text.lastIndexOf('^')
             )
 
             var lastNumber: String = ""
@@ -259,7 +269,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
 
             leftExpression = if (
                 leftExpression.lastOrNull() == '-'
-                && leftExpression.getOrNull(leftExpression.length - 2) in arrayOf('+', '-', '*', '/')
+                && leftExpression.getOrNull(leftExpression.length - 2) in arrayOf('+', '-', '*', '/', '^')
             ) {
                 leftExpression.dropLast(1)
             } else if (leftExpression.isEmpty() && lastNumber.firstOrNull() == '-') {
@@ -303,15 +313,15 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
         while (i < tokens.size) {
             when {
                 (
-                        tokens[i].isDigit()
-                                || tokens[i] == '.'
-                        ) || (
-                        tokens[i] == '-'
-                                && (
-                                i == 0 // When '-' is before first number
-                                        || tokens[i - 1] in arrayOf('+', '-', '*', '/') // When before operator?
-                                )
-                        ) -> {
+                    tokens[i].isDigit()
+                    || tokens[i] == '.'
+                ) || (
+                    tokens[i] == '-'
+                    && (
+                        i == 0 // When '-' is before first number
+                        || tokens[i - 1] in arrayOf('+', '-', '*', '/', '^') // When '-' before operator
+                    )
+                ) -> {
                     val sb = StringBuilder()
                     if (tokens[i] == '-') {
                         sb.append(tokens[i++])
@@ -324,7 +334,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
                     values.push(sb.toString().toDouble())
                     i -= 1
                 }
-                tokens[i] in arrayOf('+', '-', '*', '/') -> {
+                tokens[i] in arrayOf('+', '-', '*', '/', '^') -> {
                     while (operations.isNotEmpty() && hasPrecedence(tokens[i], operations.peek())) {
                         values.push(applyOp(operations.pop(), values.pop(), values.pop()))
                     }
@@ -345,7 +355,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun hasPrecedence(op1: Char, op2: Char): Boolean {
         if (
-            (op1 == '*' || op1 == '/')
+            (op1 == '*' || op1 == '/' || op1 == '^')
             && (op2 == '+' || op2 == '-')
         ) {
             return false
@@ -366,6 +376,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
 
                 a / b
             }
+            '^' -> a.pow(b)
             else -> 0.0
         }
     }
