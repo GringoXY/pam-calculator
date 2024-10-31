@@ -7,6 +7,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import java.lang.Math.pow
 import java.util.Stack
 import kotlin.math.cos
 import kotlin.math.sin
@@ -40,7 +41,8 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
         // Operations
         R.id.btn_add, R.id.btn_subtract, R.id.btn_multiply, R.id.btn_divide,
         R.id.btn_sin, R.id.btn_cos, R.id.btn_tan,
-        R.id.btn_sqrt,
+        R.id.btn_sqrt, R.id.btn_power_two,
+
 
         // Actions
         R.id.btn_all_clear, R.id.btn_clear, R.id.btn_backspace,
@@ -100,6 +102,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_cos -> onCosine()
             R.id.btn_sqrt -> onSquareRoot()
             R.id.btn_tan -> onTangent()
+            R.id.btn_power_two -> onPowerTwo()
 
             R.id.btn_all_clear -> onAllClear()
             R.id.btn_clear -> onClear()
@@ -196,6 +199,21 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
                 val tangent = tan(radians).toString()
                 txtResult.text = tangent
                 appendToHistory("tan($radians rad)=$tangent")
+            } catch (e: Exception) {
+                txtResult.text = "Error: ${e.message}"
+                stateError = true
+            }
+        }
+    }
+
+    private fun onPowerTwo() {
+        if (lastNumeric && !stateError) {
+            val text: String = txtResult.text.toString()
+            try {
+                val result = evaluate(text)
+                val power = pow(result, 2.0).toString()
+                txtResult.text = power
+                appendToHistory("($text)^2=$power")
             } catch (e: Exception) {
                 txtResult.text = "Error: ${e.message}"
                 stateError = true
