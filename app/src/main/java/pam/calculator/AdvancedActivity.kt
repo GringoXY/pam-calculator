@@ -8,6 +8,10 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Stack
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.sqrt
+import kotlin.math.tan
 
 class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var txtResult: TextView
@@ -35,7 +39,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
 
         // Operations
         R.id.btn_add, R.id.btn_subtract, R.id.btn_multiply, R.id.btn_divide,
-        R.id.btn_sin, R.id.btn_cos,
+        R.id.btn_sin, R.id.btn_cos, R.id.btn_tan,
         R.id.btn_sqrt,
 
         // Actions
@@ -95,6 +99,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_sin -> onSinus()
             R.id.btn_cos -> onCosine()
             R.id.btn_sqrt -> onSquareRoot()
+            R.id.btn_tan -> onTangent()
 
             R.id.btn_all_clear -> onAllClear()
             R.id.btn_clear -> onClear()
@@ -141,7 +146,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             try {
                 val result = evaluate(text)
                 val radians = Math.toRadians(result)
-                val sinus = Math.sin(radians).toString()
+                val sinus = sin(radians).toString()
                 txtResult.text = sinus
                 appendToHistory("sin($radians rad)=$sinus")
             } catch (e: Exception) {
@@ -157,7 +162,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             try {
                 val result = evaluate(text)
                 val radians = Math.toRadians(result)
-                val cosine = Math.cos(radians).toString()
+                val cosine = cos(radians).toString()
                 txtResult.text = cosine
                 appendToHistory("cos($radians rad)=$cosine")
             } catch (e: Exception) {
@@ -172,9 +177,25 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             val text: String = txtResult.text.toString()
             try {
                 val result = evaluate(text)
-                val sqrt = Math.sqrt(result).toString()
+                val sqrt = sqrt(result).toString()
                 txtResult.text = sqrt
                 appendToHistory("sqrt($result)=$sqrt")
+            } catch (e: Exception) {
+                txtResult.text = "Error: ${e.message}"
+                stateError = true
+            }
+        }
+    }
+
+    private fun onTangent() {
+        if (lastNumeric && !stateError) {
+            val text: String = txtResult.text.toString()
+            try {
+                val result = evaluate(text)
+                val radians = Math.toRadians(result)
+                val tangent = tan(radians).toString()
+                txtResult.text = tangent
+                appendToHistory("tan($radians rad)=$tangent")
             } catch (e: Exception) {
                 txtResult.text = "Error: ${e.message}"
                 stateError = true
