@@ -142,6 +142,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
                 val result = evaluate(text)
                 val radians = Math.toRadians(result)
                 val sinus = Math.sin(radians).toString()
+                txtResult.text = sinus
                 appendToHistory("sin($radians rad)=$sinus")
             } catch (e: Exception) {
                 txtResult.text = "Error: ${e.message}"
@@ -157,6 +158,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
                 val result = evaluate(text)
                 val radians = Math.toRadians(result)
                 val cosine = Math.cos(radians).toString()
+                txtResult.text = cosine
                 appendToHistory("cos($radians rad)=$cosine")
             } catch (e: Exception) {
                 txtResult.text = "Error: ${e.message}"
@@ -171,6 +173,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             try {
                 val result = evaluate(text)
                 val sqrt = Math.sqrt(result).toString()
+                txtResult.text = sqrt
                 appendToHistory("sqrt($result)=$sqrt")
             } catch (e: Exception) {
                 txtResult.text = "Error: ${e.message}"
