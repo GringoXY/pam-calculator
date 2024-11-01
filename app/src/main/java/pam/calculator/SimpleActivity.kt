@@ -185,9 +185,9 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
         if (lastNumeric && !stateError) {
             val text: String = txtResult.text.toString()
             try {
-                val result = evaluate(text)
-                txtResult.text = result.toString()
-                appendToHistory("${text}=${result}")
+                var result = evaluate(text)
+                txtResult.text = result.toBigDecimal().toPlainString()
+                appendToHistory("$text=$result")
             } catch (e: Exception) {
                 txtResult.text = "Error: ${e.message}"
                 stateError = true
