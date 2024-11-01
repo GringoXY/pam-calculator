@@ -11,7 +11,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintHeight_percent="0.17"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/result"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -33,7 +32,7 @@
         android:hint="Start typing..."
         android:textSize="@dimen/txtViewSize"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.17"
+        app:layout_constraintHeight_percent="0.22"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/scrollView_history" />
 
@@ -45,7 +44,7 @@
         android:rowCount="5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.66"
+        app:layout_constraintHeight_percent="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/result">
 

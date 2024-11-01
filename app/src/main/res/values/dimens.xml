@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="btnTextSize">24sp</dimen>
+    <dimen name="btnTextSize">15sp</dimen>
     <dimen name="btnTextSizeS">9sp</dimen>
     <dimen name="btnTextSizeXS">7sp</dimen>
     <dimen name="txtViewSize">60sp</dimen>

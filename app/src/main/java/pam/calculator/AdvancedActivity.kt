@@ -321,8 +321,8 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             val text: String = txtResult.text.toString()
             try {
                 val result = evaluate(text)
-                txtResult.text = result.toString()
-                appendToHistory("${text}=${result}")
+                txtResult.text = result.toBigDecimal().toPlainString()
+                appendToHistory("$text=$result")
             } catch (e: Exception) {
                 txtResult.text = "Error: ${e.message}"
                 stateError = true
