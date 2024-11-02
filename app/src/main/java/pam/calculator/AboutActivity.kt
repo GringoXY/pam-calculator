@@ -9,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 
 class AboutActivity : AppCompatActivity() {
     private lateinit var btnProfile: Button
+    private lateinit var btnRepo: Button
 
     private val githubProfileUri: String = "https://github.com/GringoXY"
+    private val githubRepositoryUri: String = "https://github.com/GringoXY/pam-calculator"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,14 +25,23 @@ class AboutActivity : AppCompatActivity() {
 
     fun findControls() {
         btnProfile = findViewById<Button>(R.id.btnProfile)
+        btnRepo = findViewById<Button>(R.id.btnRepo)
     }
 
     fun setOnClickListeners() {
         btnProfile.setOnClickListener {
-            val openUrl = Intent(Intent.ACTION_VIEW)
-            openUrl.data = Uri.parse(githubProfileUri)
-            startActivity(openUrl)
+            openUrl(githubProfileUri)
         }
+
+        btnRepo.setOnClickListener {
+            openUrl(githubRepositoryUri)
+        }
+    }
+
+    private fun openUrl(uri: String) {
+        val openUrl = Intent(Intent.ACTION_VIEW)
+        openUrl.data = Uri.parse(uri)
+        startActivity(openUrl)
     }
 
 }
