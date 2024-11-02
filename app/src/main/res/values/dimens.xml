@@ -5,6 +5,8 @@
     <dimen name="btnTextSizeXS">7sp</dimen>
     <dimen name="txtViewSize">60sp</dimen>
     <dimen name="txtHistorySize">16sp</dimen>
-    <dimen name="txtParagraph">18sp</dimen>
+    <dimen name="txtParagraph">16sp</dimen>
+    <dimen name="txtParagraphPadding">15sp</dimen>
+    <dimen name="txtParagraphSpacing">5sp</dimen>
     <dimen name="txtEmail">10sp</dimen>
 </resources>
