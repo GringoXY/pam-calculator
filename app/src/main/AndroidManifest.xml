@@ -27,6 +27,9 @@
         <activity
             android:name=".AdvancedActivity"
             android:exported="false" />
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
