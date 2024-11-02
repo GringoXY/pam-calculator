@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         android:textSize="@dimen/txtParagraph"
-        android:padding="15sp"
-        android:lineSpacingExtra="5sp"
+        android:padding="@dimen/txtParagraphPadding"
+        android:lineSpacingExtra="@dimen/txtParagraphSpacing"
         app:layout_constraintTop_toBottomOf="@+id/txtAppName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/txtAboutMe" />
 
     <TextView
         android:id="@+id/txtEmail"
@@ -58,12 +58,13 @@
         android:layout_height="wrap_content"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure ."
         android:textSize="@dimen/txtParagraph"
-        android:padding="@dimen/txtParagraphPadding"
+        android:paddingTop="@dimen/txtParagraphPadding"
+        android:paddingLeft="@dimen/txtParagraphPadding"
+        android:paddingRight="@dimen/txtParagraphPadding"
         android:lineSpacingExtra="@dimen/txtParagraphSpacing"
         app:layout_constraintTop_toBottomOf="@+id/txtEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/imgBtnProfile"
