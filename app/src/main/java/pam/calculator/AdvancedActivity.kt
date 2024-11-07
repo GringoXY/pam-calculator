@@ -140,7 +140,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
                     return@breaking
                 }
 
-                if (c in arrayOf('+', '-', '/', '*') || (c.isDigit() && i == text.length - 1)) {
+                if (c in arrayOf('+', '-', '/', '*', '^') || (c.isDigit() && i == text.length - 1)) {
                     txtResult.append(".")
                     return@breaking
                 }
@@ -417,7 +417,12 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
 
                 a / b
             }
-            '^' -> a.pow(b.toInt())
+            '^' -> {
+                val bRemainder = b.remainder(BigDecimal.ONE)
+                val bInt = b.subtract(bRemainder)
+
+                a.pow(bInt.intValueExact()) * BigDecimal(a.toDouble().pow(bRemainder.toDouble()))
+            }
             else -> 0.0.toBigDecimal()
         }
     }
