@@ -362,16 +362,16 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
                         || tokens[i - 1] in arrayOf('+', '-', '*', '/', '^') // When '-' before operator
                     )
                 ) -> {
-                    val sb = StringBuilder()
+                    val numberSb = StringBuilder()
                     if (tokens[i] == '-') {
-                        sb.append(tokens[i++])
+                        numberSb.append(tokens[i++])
                     }
 
                     while (i < tokens.size && (tokens[i].isDigit() || tokens[i] == '.')) {
-                        sb.append(tokens[i++])
+                        numberSb.append(tokens[i++])
                     }
 
-                    values.push(sb.toString().toDouble())
+                    values.push(numberSb.toString().toDouble())
                     i -= 1
                 }
                 tokens[i] in arrayOf('+', '-', '*', '/', '^') -> {
