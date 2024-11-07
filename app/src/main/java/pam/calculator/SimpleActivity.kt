@@ -14,7 +14,6 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var txtResult: TextView
     private lateinit var txtHistory: TextView
     private lateinit var scrollViewHistory: ScrollView
-    private val digitsLimit: Number = 8
 
     private val lastNumeric: Boolean
         get() = txtResult.text.lastOrNull()?.isDigit() ?: run {
