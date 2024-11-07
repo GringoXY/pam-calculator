@@ -14,6 +14,7 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var txtResult: TextView
     private lateinit var txtHistory: TextView
     private lateinit var scrollViewHistory: ScrollView
+    private lateinit var scrollViewResult: ScrollView
 
     private val lastNumeric: Boolean
         get() = txtResult.text.lastOrNull()?.isDigit() ?: run {
@@ -69,6 +70,7 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
         txtResult = findViewById(R.id.result)
         txtHistory = findViewById(R.id.history)
         scrollViewHistory = findViewById(R.id.scrollView_history)
+        scrollViewResult = findViewById(R.id.scrollView_result)
     }
 
     private fun setListeners() {
@@ -103,13 +105,16 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
             stateError = false
         } else {
             txtResult.append(text)
+            scrollViewResult.post {
+                scrollViewResult.fullScroll(View.FOCUS_DOWN)
+            }
         }
     }
 
     private fun onDecimalPoint() {
         val text = txtResult.text
         run breaking@ {
-            text.reversed().forEachIndexed() { i, c ->
+            text.reversed().forEachIndexed { i, c ->
                 if (c.equals('.')) { // Dot already in number. Can't add another!
                     return@breaking
                 }
