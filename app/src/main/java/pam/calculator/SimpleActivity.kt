@@ -109,8 +109,18 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun onDecimalPoint() {
-        if (lastNumeric && !lastDot) {
-            txtResult.append(".")
+        val text = txtResult.text
+        run breaking@ {
+            text.reversed().forEachIndexed() { i, c ->
+                if (c.equals('.')) { // Dot already in number. Can't add another!
+                    return@breaking
+                }
+
+                if (c in arrayOf('+', '-', '/', '*') || (c.isDigit() && i == text.length - 1)) {
+                    txtResult.append(".")
+                    return@breaking
+                }
+            }
         }
     }
 
