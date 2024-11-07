@@ -22,6 +22,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var txtHistory: TextView
     private lateinit var scrollViewHistory: ScrollView
     private lateinit var scrollViewResult: ScrollView
+    private var previousEvaluationResult: BigDecimal = BigDecimal(0)
 
     private val operatorsMap = mapOf<Int, CharSequence>(
         R.id.btn_add to "+",
@@ -335,7 +336,11 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             try {
                 val result = evaluate(text)
                 txtResult.text = result.toPlainString()
-                appendToHistory("$text=$result")
+                if (!previousEvaluationResult.equals(result)) {
+                    appendToHistory("$text=$result")
+                }
+
+                previousEvaluationResult = result
             } catch (e: Exception) {
                 txtResult.text = "Error: ${e.message}"
                 stateError = true

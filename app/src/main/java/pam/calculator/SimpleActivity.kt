@@ -15,6 +15,7 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var txtHistory: TextView
     private lateinit var scrollViewHistory: ScrollView
     private lateinit var scrollViewResult: ScrollView
+    private var previousEvaluationResult: BigDecimal = BigDecimal(0)
 
     private val lastNumeric: Boolean
         get() = txtResult.text.lastOrNull()?.isDigit() ?: run {
@@ -200,7 +201,10 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
             try {
                 val result = evaluate(text)
                 txtResult.text = result.toPlainString()
-                appendToHistory("$text=$result")
+                if (!previousEvaluationResult.equals(result)) {
+                    appendToHistory("$text=$result")
+                }
+                previousEvaluationResult = result
             } catch (e: Exception) {
                 txtResult.text = "Error: ${e.message}"
                 stateError = true
