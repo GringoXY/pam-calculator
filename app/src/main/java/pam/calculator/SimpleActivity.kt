@@ -24,9 +24,6 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
 
     private var stateError: Boolean = false
 
-    private val lastDot: Boolean
-        get() = txtResult.text.lastOrNull() == '.'
-
     private val buttons: List<Int> = listOf(
         // Number creation
         R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3,
