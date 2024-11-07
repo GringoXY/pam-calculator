@@ -7,6 +7,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import java.math.BigDecimal
 import java.util.Stack
 import kotlin.math.cos
 import kotlin.math.ln
@@ -139,7 +140,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
                     return@breaking
                 }
 
-                if (c in arrayOf('+', '-', '/', '*') || (c.isDigit() && i == text.length - 1)) {
+                if (c in arrayOf('+', '-', '/', '*', '^') || (c.isDigit() && i == text.length - 1)) {
                     txtResult.append(".")
                     return@breaking
                 }
@@ -167,7 +168,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             val text: String = txtResult.text.toString()
             try {
                 val result = evaluate(text)
-                val radians = Math.toRadians(result)
+                val radians = Math.toRadians(result.toDouble())
                 val sinus = sin(radians).toString()
                 txtResult.text = sinus
                 appendToHistory("sin($radians rad)=$sinus")
@@ -183,7 +184,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             val text: String = txtResult.text.toString()
             try {
                 val result = evaluate(text)
-                val radians = Math.toRadians(result)
+                val radians = Math.toRadians(result.toDouble())
                 val cosine = cos(radians).toString()
                 txtResult.text = cosine
                 appendToHistory("cos($radians rad)=$cosine")
@@ -199,7 +200,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             val text: String = txtResult.text.toString()
             try {
                 val result = evaluate(text)
-                val sqrt = sqrt(result).toString()
+                val sqrt = sqrt(result.toDouble()).toString()
                 txtResult.text = sqrt
                 appendToHistory("sqrt($result)=$sqrt")
             } catch (e: Exception) {
@@ -214,7 +215,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             val text: String = txtResult.text.toString()
             try {
                 val result = evaluate(text)
-                val radians = Math.toRadians(result)
+                val radians = Math.toRadians(result.toDouble())
                 val tangent = tan(radians).toString()
                 txtResult.text = tangent
                 appendToHistory("tan($radians rad)=$tangent")
@@ -230,7 +231,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             val text: String = txtResult.text.toString()
             try {
                 val result = evaluate(text)
-                val power = result.pow(2.0).toString()
+                val power = result.pow(2).toString()
                 txtResult.text = power
                 appendToHistory("($text)^2=$power")
             } catch (e: Exception) {
@@ -245,7 +246,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             val text: String = txtResult.text.toString()
             try {
                 val result = evaluate(text)
-                val naturalLogarithm = ln(result).toString()
+                val naturalLogarithm = ln(result.toDouble()).toString()
                 txtResult.text = naturalLogarithm
                 appendToHistory("ln($text)=$naturalLogarithm")
             } catch (e: Exception) {
@@ -260,7 +261,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             val text: String = txtResult.text.toString()
             try {
                 val result = evaluate(text)
-                val commonLogarithm = log10(result).toString()
+                val commonLogarithm = log10(result.toDouble()).toString()
                 txtResult.text = commonLogarithm
                 appendToHistory("log($text)=$commonLogarithm")
             } catch (e: Exception) {
@@ -328,7 +329,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             val text: String = txtResult.text.toString()
             try {
                 val result = evaluate(text)
-                txtResult.text = result.toBigDecimal().toPlainString()
+                txtResult.text = result.toPlainString()
                 appendToHistory("$text=$result")
             } catch (e: Exception) {
                 txtResult.text = "Error: ${e.message}"
@@ -344,9 +345,9 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun evaluate(expression: String): Double  {
+    private fun evaluate(expression: String): BigDecimal  {
         val tokens = expression.toCharArray()
-        val values = Stack<Double>()
+        val values = Stack<BigDecimal>()
         val operations = Stack<Char>()
 
         var i = 0
@@ -362,16 +363,16 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
                         || tokens[i - 1] in arrayOf('+', '-', '*', '/', '^') // When '-' before operator
                     )
                 ) -> {
-                    val sb = StringBuilder()
+                    val numberSb = StringBuilder()
                     if (tokens[i] == '-') {
-                        sb.append(tokens[i++])
+                        numberSb.append(tokens[i++])
                     }
 
                     while (i < tokens.size && (tokens[i].isDigit() || tokens[i] == '.')) {
-                        sb.append(tokens[i++])
+                        numberSb.append(tokens[i++])
                     }
 
-                    values.push(sb.toString().toDouble())
+                    values.push(numberSb.toString().toBigDecimal())
                     i -= 1
                 }
                 tokens[i] in arrayOf('+', '-', '*', '/', '^') -> {
@@ -404,20 +405,25 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
         return true
     }
 
-    private fun applyOp(op: Char, b: Double, a: Double): Double {
+    private fun applyOp(op: Char, b: BigDecimal, a: BigDecimal): BigDecimal {
         return when (op) {
             '+' -> a + b
             '-' -> a - b
             '*' -> a * b
             '/' -> {
-                if (b == 0.0) {
+                if (b == 0.0.toBigDecimal()) {
                     throw ArithmeticException("Cannot divide by zero")
                 }
 
                 a / b
             }
-            '^' -> a.pow(b)
-            else -> 0.0
+            '^' -> {
+                val bRemainder = b.remainder(BigDecimal.ONE)
+                val bInt = b.subtract(bRemainder)
+
+                a.pow(bInt.intValueExact()) * BigDecimal(a.toDouble().pow(bRemainder.toDouble()))
+            }
+            else -> 0.0.toBigDecimal()
         }
     }
 }

@@ -7,6 +7,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import java.math.BigDecimal
 import java.util.Stack
 
 class SimpleActivity : AppCompatActivity(), View.OnClickListener {
@@ -193,7 +194,7 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
             val text: String = txtResult.text.toString()
             try {
                 val result = evaluate(text)
-                txtResult.text = result.toBigDecimal().toPlainString()
+                txtResult.text = result.toPlainString()
                 appendToHistory("$text=$result")
             } catch (e: Exception) {
                 txtResult.text = "Error: ${e.message}"
@@ -209,9 +210,9 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun evaluate(expression: String): Double  {
+    private fun evaluate(expression: String): BigDecimal  {
         val tokens = expression.toCharArray()
-        val values = Stack<Double>()
+        val values = Stack<BigDecimal>()
         val operations = Stack<Char>()
 
         var i = 0
@@ -224,19 +225,19 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
                     tokens[i] == '-'
                     && (
                         i == 0 // When '-' is before first number
-                        || tokens[i - 1] in arrayOf('+', '-', '*', '/') // When before operator?
+                        || tokens[i - 1] in arrayOf('+', '-', '*', '/') // When '-' before operator
                     )
                 ) -> {
-                    val sb = StringBuilder()
+                    val numberSb = StringBuilder()
                     if (tokens[i] == '-') {
-                        sb.append(tokens[i++])
+                        numberSb.append(tokens[i++])
                     }
 
                     while (i < tokens.size && (tokens[i].isDigit() || tokens[i] == '.')) {
-                        sb.append(tokens[i++])
+                        numberSb.append(tokens[i++])
                     }
 
-                    values.push(sb.toString().toDouble())
+                    values.push(numberSb.toString().toBigDecimal())
                     i -= 1
                 }
                 tokens[i] in arrayOf('+', '-', '*', '/') -> {
@@ -269,19 +270,19 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
         return true
     }
 
-    private fun applyOp(op: Char, b: Double, a: Double): Double {
+    private fun applyOp(op: Char, b: BigDecimal, a: BigDecimal): BigDecimal {
         return when (op) {
             '+' -> a + b
             '-' -> a - b
             '*' -> a * b
             '/' -> {
-                if (b == 0.0) {
+                if (b == 0.0.toBigDecimal()) {
                     throw ArithmeticException("Cannot divide by zero")
                 }
 
                 a / b
             }
-            else -> 0.0
+            else -> 0.0.toBigDecimal()
         }
     }
 }
