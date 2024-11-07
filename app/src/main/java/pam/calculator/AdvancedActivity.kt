@@ -21,6 +21,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var txtResult: TextView
     private lateinit var txtHistory: TextView
     private lateinit var scrollViewHistory: ScrollView
+    private lateinit var scrollViewResult: ScrollView
 
     private val operatorsMap = mapOf<Int, CharSequence>(
         R.id.btn_add to "+",
@@ -87,6 +88,7 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
         txtResult = findViewById(R.id.result)
         txtHistory = findViewById(R.id.history)
         scrollViewHistory = findViewById(R.id.scrollView_history)
+        scrollViewResult = findViewById(R.id.scrollView_result)
     }
 
     private fun setListeners() {
@@ -129,6 +131,9 @@ class AdvancedActivity : AppCompatActivity(), View.OnClickListener {
             stateError = false
         } else {
             txtResult.append(text)
+            scrollViewResult.post {
+                scrollViewResult.fullScroll(View.FOCUS_DOWN)
+            }
         }
     }
 
