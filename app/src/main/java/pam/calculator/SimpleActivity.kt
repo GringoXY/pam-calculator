@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import java.math.BigDecimal
+import java.math.MathContext
 import java.util.Stack
 
 class SimpleActivity : AppCompatActivity(), View.OnClickListener {
@@ -289,7 +290,7 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
                     throw ArithmeticException("Cannot divide by zero")
                 }
 
-                a.divide(b)
+                a.divide(b, MathContext.DECIMAL128)
             }
             else -> 0.0.toBigDecimal()
         }
