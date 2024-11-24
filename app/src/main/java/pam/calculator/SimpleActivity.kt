@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import java.math.BigDecimal
+import java.math.MathContext
 import java.util.Stack
 
 class SimpleActivity : AppCompatActivity(), View.OnClickListener {
@@ -281,15 +282,15 @@ class SimpleActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun applyOp(op: Char, b: BigDecimal, a: BigDecimal): BigDecimal {
         return when (op) {
-            '+' -> a + b
-            '-' -> a - b
-            '*' -> a * b
+            '+' -> a.plus(b)
+            '-' -> a.subtract(b)
+            '*' -> a.multiply(b)
             '/' -> {
                 if (b == 0.0.toBigDecimal()) {
                     throw ArithmeticException("Cannot divide by zero")
                 }
 
-                a / b
+                a.divide(b, MathContext.DECIMAL128)
             }
             else -> 0.0.toBigDecimal()
         }
